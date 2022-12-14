@@ -37,13 +37,23 @@ const TitleStyle = styled.div`
   background-color: black;
 `;
 const BodyStyle = styled.div`
+  height: 100px;
   width: 90%;
   border: 1px solid black;
   text-align: center;
   padding: 10px 0 10px 0;
   margin-bottom: 10px;
 `;
-const InputStyle = styled.input`
+const TitleInput = styled.input`
+  width: 90%;
+  padding: 5px 0 5px 0;
+  border: 2px solid blue;
+  text-align: center;
+  margin: 5px;
+  background-color: #cacaca;
+`;
+const BodyInput = styled.input`
+  height: 100px;
   width: 90%;
   border: 2px solid blue;
   text-align: center;
@@ -115,15 +125,13 @@ const List = ({ globalTodo }) => {
             <div>
               {editing ? (
                 <TitleBodyStyle>
-                  <TitleStyle>제목</TitleStyle>
-                  <InputStyle
+                  <TitleInput
                     onChange={editTitleValue}
                     type="text"
                     value={editTitle}
                     required
                   />
-                  <TitleStyle>내용</TitleStyle>
-                  <InputStyle
+                  <BodyInput
                     onChange={editBodyValue}
                     type="text"
                     value={editBody}
@@ -132,9 +140,7 @@ const List = ({ globalTodo }) => {
                 </TitleBodyStyle>
               ) : (
                 <TitleBodyStyle>
-                  <TitleStyle>제목</TitleStyle>
-                  <BodyStyle>{globalTodo.title}</BodyStyle>
-                  <TitleStyle>내용</TitleStyle>
+                  <TitleStyle>{globalTodo.title}</TitleStyle>
                   <BodyStyle>{globalTodo.body}</BodyStyle>
                 </TitleBodyStyle>
               )}

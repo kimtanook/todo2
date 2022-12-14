@@ -42,20 +42,23 @@ const TitleBox = styled.div`
 `;
 const BodyBox = styled.div`
   font-size: 30px;
-  margin: 20px;
+  margin: 10px;
 `;
 const TitleBody = styled.div`
-  background-color: black;
+  padding: 5px 0 5px 0;
+  text-align: center;
+  margin: 5px;
   color: white;
-  padding: 10px;
-  width: 400px;
+  background-color: black;
+  width: 420px;
 `;
 const TitleBodyText = styled.div`
-  padding-top: 30px;
-  border-bottom: 2px solid black;
-  border-left: 2px solid black;
-  border-right: 2px solid black;
-  height: 60px;
+  height: 200px;
+  width: 420px;
+  border: 2px solid black;
+  text-align: center;
+  padding: 10px 0 10px 0;
+  margin-bottom: 10px;
 `;
 const boxFade = keyframes`
   50% {
@@ -96,11 +99,9 @@ const Detail = () => {
       </IdBox>
       <TitleBodyBox>
         <TitleBox>
-          <TitleBody>제목</TitleBody>{' '}
-          <TitleBodyText>{todoDetail.title}</TitleBodyText>
+          <TitleBody>{todoDetail.title}</TitleBody>
         </TitleBox>
         <BodyBox>
-          <TitleBody>내용 </TitleBody>
           <TitleBodyText>{todoDetail.body}</TitleBodyText>
         </BodyBox>
         {!todoDetail.isDone ? (
