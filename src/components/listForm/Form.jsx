@@ -9,6 +9,11 @@ const FormStyle = styled.div`
   justify-content: center;
   align-items: center;
 `;
+
+const InputStyle = styled.input`
+  margin: 5px;
+  height: 20px;
+`;
 const Form = () => {
   const [title, setTitle] = useState('');
   const [body, setBody] = useState('');
@@ -33,21 +38,21 @@ const Form = () => {
   return (
     <FormStyle>
       <form onSubmit={onSubmit} className="todo-form">
-        <input
+        <InputStyle
           onChange={onChangeTitle}
           value={title}
           type="text"
-          placeholder="title"
+          placeholder="할 일 제목"
           maxLength={20}
         />
-        <input
+        <InputStyle
           onChange={onChangeBody}
           value={body}
           type="text"
-          placeholder="body"
+          placeholder="할 일 내용"
           maxLength={20}
         />
-        <button>Add To Do</button>
+        <button>작성완료</button>
       </form>
       <hr className="hr"></hr>
     </FormStyle>

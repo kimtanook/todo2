@@ -12,14 +12,16 @@ const TodoListStyle = styled.div`
   gap: 20px;
   grid-template-columns: repeat(2, 1fr);
   height: 300px;
-  overflow: scroll;
+  overflow-y: scroll;
 `;
 
 const TodoListConfirmName = styled.div`
   background-color: black;
+  box-shadow: 5px 5px 5px 5px gray;
   color: white;
   padding: 10px 40px 10px 40px;
-  border-radius: 5px;
+
+  margin-bottom: 10px;
   display: flex;
   flex-direction: row;
   justify-content: space-between;
@@ -29,6 +31,9 @@ const TodoListConfirmName = styled.div`
 function TodoList() {
   const globalTodo = useSelector((state) => state.todoReducer.todos);
   const dispatch = useDispatch();
+
+  const globalTodoNotDone = globalTodo.filter((item) => item.isDone === false);
+  const globalTodoDone = globalTodo.filter((item) => item.isDone === true);
 
   const deleteTodoAll = () => {
     if (confirm('정말 전부 삭제하시겠습니까?') === true) {
@@ -48,7 +53,7 @@ function TodoList() {
       <Form />
       <div>
         <TodoListConfirmName>
-          <div>To Do List</div>
+          <div>To Do List ( {globalTodoNotDone.length}개 )</div>
           <button onClick={deleteTodoAll}>ToDoList 전체삭제</button>
         </TodoListConfirmName>
         <TodoListStyle>
@@ -59,7 +64,7 @@ function TodoList() {
       </div>
       <div>
         <TodoListConfirmName>
-          <div>Completion</div>
+          <div>Completion ( {globalTodoDone.length}개 )</div>
           <button onClick={deleteConfirmAll}>Completion 전체삭제</button>
         </TodoListConfirmName>
         <TodoListStyle>

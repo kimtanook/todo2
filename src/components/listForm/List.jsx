@@ -1,3 +1,4 @@
+/* eslint-disable no-restricted-globals */
 /* eslint-disable array-callback-return */
 import React, { useState } from 'react';
 import { useDispatch } from 'react-redux';
@@ -7,49 +8,63 @@ import styled from 'styled-components';
 import { confirmTodo, deleteTodo, editTodo } from '../../redux/modules/todo';
 
 const ListStyle = styled.div`
-  background-color: #d5d5d5c5;
+  background-color: #efececc5;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  min-height: 200px;
+  height: 260px;
   border: 1px solid black;
-  border-radius: 10px;
   margin: 10px 50px 10px 50px;
 `;
 
 const TitleBodyStyle = styled.div`
   width: 300px;
   min-width: 200px;
+  margin-top: 10px;
   display: flex;
-  flex-direction: row;
-  justify-content: space-between;
+  flex-direction: column;
+  justify-content: center;
   align-items: center;
 `;
 
 const TitleStyle = styled.div`
-  width: 50px;
-  padding: 5px;
+  width: 90%;
+  padding: 5px 0 5px 0;
   text-align: center;
   margin: 5px;
   color: white;
   background-color: black;
-  border-radius: 5px;
 `;
 const BodyStyle = styled.div`
-  width: 80%;
-  padding: 5px;
+  width: 90%;
+  border: 1px solid black;
   text-align: center;
-
-  margin: 5px;
-  color: white;
-  background-color: black;
-  border-radius: 5px;
-
+  padding: 10px 0 10px 0;
+  margin-bottom: 10px;
+`;
+const InputStyle = styled.input`
+  width: 90%;
+  border: 2px solid blue;
+  text-align: center;
+  padding: 10px 0 10px 0;
+  margin-bottom: 10px;
+`;
+const EditButton = styled.div`
   display: flex;
   flex-direction: row;
   justify-content: center;
   align-items: center;
+`;
+const OtherButton = styled.div`
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  margin: 10px;
+`;
+const Hr = styled.hr`
+  width: 95%;
 `;
 
 const List = ({ globalTodo }) => {
@@ -72,8 +87,10 @@ const List = ({ globalTodo }) => {
   };
 
   const deleteToDo = (event) => {
-    console.log('asd');
-    dispatch(deleteTodo(Number(event.target.id)));
+    if (confirm('정말 삭제하시겠습니까?') === true) {
+      dispatch(deleteTodo(Number(event.target.id)));
+      alert('삭제되었습니다.');
+    }
   };
   const onEditSubmit = (event) => {
     event.preventDefault();
@@ -84,7 +101,6 @@ const List = ({ globalTodo }) => {
         id: Number(event.target.id),
       })
     );
-    console.log(event.target);
     setEditing(false);
   };
   const editingToggle = () => {
@@ -94,44 +110,47 @@ const List = ({ globalTodo }) => {
   return (
     <ListStyle key={globalTodo.id}>
       <div id={globalTodo.id}>
-        <TitleBodyStyle>
-          <div>
-            <form onSubmit={onEditSubmit} id={globalTodo.id}>
+        <div>
+          <form onSubmit={onEditSubmit} id={globalTodo.id}>
+            <div>
               {editing ? (
-                <div>
+                <TitleBodyStyle>
                   <TitleStyle>제목</TitleStyle>
-                  <input
+                  <InputStyle
                     onChange={editTitleValue}
                     type="text"
                     value={editTitle}
+                    required
                   />
-                  <BodyStyle>내용</BodyStyle>
-                  <input
+                  <TitleStyle>내용</TitleStyle>
+                  <InputStyle
                     onChange={editBodyValue}
                     type="text"
                     value={editBody}
+                    required
                   />
-                </div>
+                </TitleBodyStyle>
               ) : (
-                <div>
+                <TitleBodyStyle>
                   <TitleStyle>제목</TitleStyle>
-                  <div>{globalTodo.title}</div>
-                  <BodyStyle>내용</BodyStyle>
-                  <div>{globalTodo.body}</div>
-                </div>
+                  <BodyStyle>{globalTodo.title}</BodyStyle>
+                  <TitleStyle>내용</TitleStyle>
+                  <BodyStyle>{globalTodo.body}</BodyStyle>
+                </TitleBodyStyle>
               )}
-              {globalTodo.isDone ? null : (
-                <div>
-                  <button type="button" onClick={editingToggle}>
-                    {editing ? '수정취소' : '수정하기'}
-                  </button>
-                  {editing ? <button>수정완료</button> : null}
-                </div>
-              )}
-            </form>
-          </div>
-        </TitleBodyStyle>
-        <div>
+            </div>
+            {globalTodo.isDone ? null : (
+              <EditButton>
+                <button type="button" onClick={editingToggle}>
+                  {editing ? '수정취소' : '수정하기'}
+                </button>
+                {editing ? <button>수정완료</button> : null}
+              </EditButton>
+            )}
+            <Hr />
+          </form>
+        </div>
+        <OtherButton>
           <div>
             <button
               onClick={() => {
@@ -149,7 +168,7 @@ const List = ({ globalTodo }) => {
               삭제
             </button>
           </div>
-        </div>
+        </OtherButton>
       </div>
     </ListStyle>
   );
