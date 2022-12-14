@@ -7,11 +7,16 @@ import { useDispatch, useSelector } from 'react-redux';
 import { todoActions } from '../../redux/modules/todo';
 import styled from 'styled-components';
 
-const TodoListStyle = styled.div`
+const TodoListContainer = styled.div`
   display: grid;
   gap: 20px;
   grid-template-columns: repeat(2, 1fr);
-  height: 300px;
+`;
+const TodoListStyle = styled.div`
+  display: grid;
+  gap: 20px;
+  grid-template-rows: repeat(3, 1fr);
+  height: 650px;
   overflow-y: scroll;
 `;
 
@@ -35,8 +40,6 @@ function TodoList() {
   const globalTodoNotDone = globalTodo.filter((item) => item.isDone === false);
   const globalTodoDone = globalTodo.filter((item) => item.isDone === true);
 
-  console.log(globalTodo);
-
   const deleteTodoAll = () => {
     if (confirm('정말 전부 삭제하시겠습니까?') === true) {
       dispatch(todoActions.allDelete(false));
@@ -53,28 +56,30 @@ function TodoList() {
     <Layout>
       <Header />
       <Form />
-      <div>
-        <TodoListConfirmName>
-          <div>To Do List ( {globalTodoNotDone.length}개 )</div>
-          <button onClick={deleteTodoAll}>ToDoList 전체삭제</button>
-        </TodoListConfirmName>
-        <TodoListStyle>
-          {globalTodo.map((todo) =>
-            !todo.isDone ? <List key={todo.id} globalTodo={todo} /> : null
-          )}
-        </TodoListStyle>
-      </div>
-      <div>
-        <TodoListConfirmName>
-          <div>Completion ( {globalTodoDone.length}개 )</div>
-          <button onClick={deleteConfirmAll}>Completion 전체삭제</button>
-        </TodoListConfirmName>
-        <TodoListStyle>
-          {globalTodo.map((todo) =>
-            todo.isDone ? <List key={todo.id} globalTodo={todo} /> : null
-          )}
-        </TodoListStyle>
-      </div>
+      <TodoListContainer>
+        <div>
+          <TodoListConfirmName>
+            <div>To Do List ( {globalTodoNotDone.length}개 )</div>
+            <button onClick={deleteTodoAll}>ToDoList 전체삭제</button>
+          </TodoListConfirmName>
+          <TodoListStyle>
+            {globalTodo.map((todo) =>
+              !todo.isDone ? <List key={todo.id} globalTodo={todo} /> : null
+            )}
+          </TodoListStyle>
+        </div>
+        <div>
+          <TodoListConfirmName>
+            <div>Completion ( {globalTodoDone.length}개 )</div>
+            <button onClick={deleteConfirmAll}>Completion 전체삭제</button>
+          </TodoListConfirmName>
+          <TodoListStyle>
+            {globalTodo.map((todo) =>
+              todo.isDone ? <List key={todo.id} globalTodo={todo} /> : null
+            )}
+          </TodoListStyle>
+        </div>
+      </TodoListContainer>
     </Layout>
   );
 }

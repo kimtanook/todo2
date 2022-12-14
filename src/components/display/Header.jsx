@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import styled, { keyframes } from 'styled-components';
 
 const boxFade = keyframes`
@@ -17,7 +17,36 @@ const HeaderStyle = styled.h1`
   }
 `;
 
+const DateStyle = styled.div`
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+`;
+
 function Header() {
-  return <HeaderStyle>My ToDos</HeaderStyle>;
+  const [time, setTime] = useState(
+    new Date(Date.now() + 9 * 60 * 60 * 1000).toLocaleString('ko-KR', {
+      timeZone: 'UTC',
+    })
+  );
+
+  useEffect(() => {
+    const id = setInterval(() => {
+      setTime(
+        new Date(Date.now() + 9 * 60 * 60 * 1000).toLocaleString('ko-KR', {
+          timeZone: 'UTC',
+        })
+      );
+    }, 1000);
+    return () => clearInterval(id);
+  }, []);
+
+  return (
+    <div>
+      <HeaderStyle>My ToDo </HeaderStyle>
+      <DateStyle>{time}</DateStyle>
+    </div>
+  );
 }
 export default Header;
