@@ -29,8 +29,8 @@ const TitleBodyStyle = styled.div`
 `;
 
 const TitleStyle = styled.div`
-  width: 90%;
-  padding: 5px 0 5px 0;
+  width: 65%;
+  padding: 5px 35px 5px 35px;
   text-align: center;
   margin: 5px;
   color: white;
@@ -38,10 +38,13 @@ const TitleStyle = styled.div`
 `;
 const BodyStyle = styled.div`
   height: 100px;
-  width: 90%;
+  width: 65%;
   border: 1px solid black;
+  display: flex;
+  justify-content: center;
+  align-items: center;
   text-align: center;
-  padding: 10px 0 10px 0;
+  padding: 10px 35px 10px 35px;
   margin-bottom: 10px;
 `;
 const TitleInput = styled.input`

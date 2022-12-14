@@ -50,14 +50,18 @@ const TitleBody = styled.div`
   margin: 5px;
   color: white;
   background-color: black;
-  width: 420px;
+  width: 380px;
+  padding: 5px 20px 5px 20px;
 `;
 const TitleBodyText = styled.div`
   height: 200px;
-  width: 420px;
+  width: 360px;
   border: 2px solid black;
   text-align: center;
-  padding: 10px 0 10px 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 10px 30px 10px 30px;
   margin-bottom: 10px;
 `;
 const boxFade = keyframes`
