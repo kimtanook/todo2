@@ -3,11 +3,11 @@ import ReactDOM from 'react-dom/client';
 import App from './App';
 import '../src/css/style.css';
 
-import store from './redux/config/configStore';
-import { Provider } from 'react-redux';
-
 import { PersistGate } from 'redux-persist/integration/react';
 import { persistStore } from 'redux-persist';
+
+import store from './redux/config/configStore';
+import { Provider } from 'react-redux';
 
 let persistor = persistStore(store);
 

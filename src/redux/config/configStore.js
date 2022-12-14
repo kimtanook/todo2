@@ -1,9 +1,10 @@
-import { createStore } from 'redux';
-import { combineReducers } from 'redux';
-import todoReducer from '../modules/todo';
+import { configureStore } from '@reduxjs/toolkit';
 
 import storage from 'redux-persist/lib/storage';
 import { persistReducer } from 'redux-persist';
+import thunk from 'redux-thunk';
+
+import todoReducer from '../modules/todo';
 
 const persistConfig = {
   key: 'root',
@@ -12,10 +13,12 @@ const persistConfig = {
 
 const postPersistedReducer = persistReducer(persistConfig, todoReducer);
 
-const rootReducer = combineReducers({
-  todoReducer: postPersistedReducer,
+const store = configureStore({
+  reducer: {
+    todoReducer: postPersistedReducer,
+  },
+  devTools: process.env.NODE_ENV !== 'production', // devTools 사용할 때
+  middleware: [thunk],
 });
-
-const store = createStore(rootReducer);
 
 export default store;

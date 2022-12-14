@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { useDispatch } from 'react-redux';
 import styled from 'styled-components';
-import { addTodo } from '../../redux/modules/todo';
+import { todoActions } from '../../redux/modules/todo';
 
 const FormStyle = styled.div`
   display: flex;
@@ -29,7 +29,12 @@ const Form = () => {
       return;
     }
     dispatch(
-      addTodo({ id: Date.now(), title: title, body: body, isDone: false })
+      todoActions.addTodo({
+        id: Date.now(),
+        title: title,
+        body: body,
+        isDone: false,
+      })
     );
     setTitle('');
     setBody('');

@@ -4,7 +4,7 @@ import Header from '../display/Header';
 import Layout from '../display/Layout';
 import List from '../listForm/List';
 import { useDispatch, useSelector } from 'react-redux';
-import { allDelete } from '../../redux/modules/todo';
+import { todoActions } from '../../redux/modules/todo';
 import styled from 'styled-components';
 
 const TodoListStyle = styled.div`
@@ -35,15 +35,17 @@ function TodoList() {
   const globalTodoNotDone = globalTodo.filter((item) => item.isDone === false);
   const globalTodoDone = globalTodo.filter((item) => item.isDone === true);
 
+  console.log(globalTodo);
+
   const deleteTodoAll = () => {
     if (confirm('정말 전부 삭제하시겠습니까?') === true) {
-      dispatch(allDelete(false));
+      dispatch(todoActions.allDelete(false));
       alert('삭제되었습니다.');
     }
   };
   const deleteConfirmAll = () => {
     if (confirm('정말 전부 삭제하시겠습니까?') === true) {
-      dispatch(allDelete(true));
+      dispatch(todoActions.allDelete(true));
       alert('삭제되었습니다.');
     }
   };

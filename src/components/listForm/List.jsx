@@ -5,7 +5,7 @@ import { useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
 
-import { confirmTodo, deleteTodo, editTodo } from '../../redux/modules/todo';
+import { todoActions } from '../../redux/modules/todo';
 
 const ListStyle = styled.div`
   background-color: #efececc5;
@@ -83,19 +83,19 @@ const List = ({ globalTodo }) => {
   const dispatch = useDispatch();
 
   const confirmToDo = (event) => {
-    dispatch(confirmTodo(Number(event.target.id)));
+    dispatch(todoActions.confirmTodo(Number(event.target.id)));
   };
 
   const deleteToDo = (event) => {
     if (confirm('정말 삭제하시겠습니까?') === true) {
-      dispatch(deleteTodo(Number(event.target.id)));
+      dispatch(todoActions.deleteTodo(Number(event.target.id)));
       alert('삭제되었습니다.');
     }
   };
   const onEditSubmit = (event) => {
     event.preventDefault();
     dispatch(
-      editTodo({
+      todoActions.editTodo({
         title: editTitle,
         body: editBody,
         id: Number(event.target.id),
