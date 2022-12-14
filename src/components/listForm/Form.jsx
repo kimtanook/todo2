@@ -49,6 +49,7 @@ const Form = () => {
           type="text"
           placeholder="할 일 제목"
           maxLength={24}
+          required
         />
         <InputStyle
           onChange={onChangeBody}
@@ -56,6 +57,7 @@ const Form = () => {
           type="text"
           placeholder="할 일 내용"
           maxLength={120}
+          required
         />
         <button>작성완료</button>
       </form>
