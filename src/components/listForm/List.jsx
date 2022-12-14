@@ -81,30 +81,38 @@ const Hr = styled.hr`
 `;
 
 const List = ({ globalTodo }) => {
+  // 진행 중 또는 완료, 수정 인풋, 수정 버튼의 조건 state
   const [editing, setEditing] = useState(false);
+  // 인풋의 title, body 벨류 state
   const [editTitle, setEditTitle] = useState(globalTodo.title);
   const [editBody, setEditBody] = useState(globalTodo.body);
 
+  // 수정하는 title 벨류의 onChange
   const editTitleValue = (event) => {
     setEditTitle(event.target.value);
   };
+  // 수정하는 body 벨류의 onChange
   const editBodyValue = (event) => {
     setEditBody(event.target.value);
   };
 
+  // useNavigate, useDispatch
   const navigate = useNavigate();
   const dispatch = useDispatch();
 
+  // redux store로, inDone의 조건인 id를 보내는 onSubmit
   const confirmToDo = (event) => {
     dispatch(todoActions.confirmTodo(Number(event.target.id)));
   };
 
+  // redux store로, delete의 조건인 id를 보내는 onSubmit
   const deleteToDo = (event) => {
     if (confirm('정말 삭제하시겠습니까?') === true) {
       dispatch(todoActions.deleteTodo(Number(event.target.id)));
       alert('삭제되었습니다.');
     }
   };
+  // redux store로 보내는 title, body 수정 onSubmit
   const onEditSubmit = (event) => {
     event.preventDefault();
     dispatch(
@@ -116,6 +124,8 @@ const List = ({ globalTodo }) => {
     );
     setEditing(false);
   };
+
+  // editing state를 바꾸는 onClick
   const editingToggle = () => {
     setEditing((prev) => !prev);
   };

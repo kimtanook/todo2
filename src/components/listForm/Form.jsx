@@ -15,14 +15,17 @@ const InputStyle = styled.input`
   height: 20px;
 `;
 const Form = () => {
+  // title, body state
   const [title, setTitle] = useState('');
   const [body, setBody] = useState('');
 
   const dispatch = useDispatch();
 
+  // title, body onChange
   const onChangeTitle = (event) => setTitle(event.target.value);
   const onChangeBody = (event) => setBody(event.target.value);
 
+  // submit
   const onSubmit = (event) => {
     event.preventDefault();
     if (title === '' || body === '') {

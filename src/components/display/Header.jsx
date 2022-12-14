@@ -25,6 +25,7 @@ const DateStyle = styled.div`
 `;
 
 function Header() {
+  // 시계
   const [time, setTime] = useState(
     new Date(Date.now() + 9 * 60 * 60 * 1000).toLocaleString('ko-KR', {
       timeZone: 'UTC',

@@ -78,10 +78,16 @@ const IsDoneStyle = styled.div`
 `;
 
 const Detail = () => {
+  // useNavigate 사용
   const navigate = useNavigate();
+
+  // redux store의 initialState를 select
   const todo = useSelector((state) => state.todoReducer.todos);
 
+  // useParams 사용 (현재 위치의 url 파라미터를 가져옴)
   const param = useParams();
+
+  // redux store 데이터의 id === 현재 위치의 param id의 데이터
   const todoDetail = todo.find((data) => data.id === parseInt(param.id));
 
   return (
