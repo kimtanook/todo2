@@ -1,5 +1,3 @@
-/* eslint-disable no-restricted-globals */
-/* eslint-disable array-callback-return */
 import React, { useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
@@ -107,7 +105,7 @@ const List = ({ globalTodo }) => {
 
   // redux store로, delete의 조건인 id를 보내는 onSubmit
   const deleteToDo = (event) => {
-    if (confirm('정말 삭제하시겠습니까?')) {
+    if (window.confirm('정말 삭제하시겠습니까?')) {
       dispatch(todoActions.deleteTodo(Number(event.target.id)));
       alert('삭제되었습니다.');
     }

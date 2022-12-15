@@ -1,4 +1,3 @@
-/* eslint-disable no-restricted-globals */
 import Form from '../listForm/Form';
 import Header from '../display/Header';
 import Layout from '../display/Layout';
@@ -41,13 +40,13 @@ function TodoList() {
   const globalTodoDone = globalTodo.filter((item) => item.isDone);
 
   const deleteTodoAll = () => {
-    if (confirm('정말 전부 삭제하시겠습니까?')) {
+    if (window.confirm('정말 전부 삭제하시겠습니까?')) {
       dispatch(todoActions.allDelete(false));
       alert('삭제되었습니다.');
     }
   };
   const deleteConfirmAll = () => {
-    if (confirm('정말 전부 삭제하시겠습니까?')) {
+    if (window.confirm('정말 전부 삭제하시겠습니까?')) {
       dispatch(todoActions.allDelete(true));
       alert('삭제되었습니다.');
     }
