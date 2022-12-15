@@ -37,17 +37,17 @@ function TodoList() {
   const globalTodo = useSelector((state) => state.todoReducer.todos);
   const dispatch = useDispatch();
 
-  const globalTodoNotDone = globalTodo.filter((item) => item.isDone === false);
-  const globalTodoDone = globalTodo.filter((item) => item.isDone === true);
+  const globalTodoNotDone = globalTodo.filter((item) => !item.isDone);
+  const globalTodoDone = globalTodo.filter((item) => item.isDone);
 
   const deleteTodoAll = () => {
-    if (confirm('정말 전부 삭제하시겠습니까?') === true) {
+    if (confirm('정말 전부 삭제하시겠습니까?')) {
       dispatch(todoActions.allDelete(false));
       alert('삭제되었습니다.');
     }
   };
   const deleteConfirmAll = () => {
-    if (confirm('정말 전부 삭제하시겠습니까?') === true) {
+    if (confirm('정말 전부 삭제하시겠습니까?')) {
       dispatch(todoActions.allDelete(true));
       alert('삭제되었습니다.');
     }

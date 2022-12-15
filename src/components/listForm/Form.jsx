@@ -45,7 +45,7 @@ const Form = () => {
 
   return (
     <FormStyle>
-      <form onSubmit={onSubmit} className="todo-form">
+      <form onSubmit={onSubmit}>
         <InputStyle
           onChange={onChangeTitle}
           value={title}
@@ -64,7 +64,7 @@ const Form = () => {
         />
         <button>작성완료</button>
       </form>
-      <hr className="hr"></hr>
+      <hr></hr>
     </FormStyle>
   );
 };
