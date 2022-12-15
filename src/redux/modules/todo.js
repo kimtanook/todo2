@@ -10,19 +10,16 @@ const todoReducer = createSlice({
   reducers: {
     addTodo: (state, action) => {
       return {
-        ...state,
         todos: [...state.todos, action.payload],
       };
     },
     deleteTodo: (state, action) => {
       return {
-        ...state,
         todos: state.todos.filter((todo) => todo.id !== action.payload),
       };
     },
     editTodo: (state, action) => {
       return {
-        ...state,
         todos: state.todos.map((todo) => {
           if (todo.id === action.payload.id) {
             return {
@@ -38,7 +35,6 @@ const todoReducer = createSlice({
     },
     confirmTodo: (state, action) => {
       return {
-        ...state,
         todos: state.todos.map((todo) => {
           if (todo.id === action.payload) {
             return {
@@ -53,7 +49,6 @@ const todoReducer = createSlice({
     },
     allDelete: (state, action) => {
       return {
-        ...state.todos,
         todos: state.todos.filter((todo) => todo.isDone !== action.payload),
       };
     },
